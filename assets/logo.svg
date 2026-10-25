@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
+  <defs>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a4fe0"/>
+      <stop offset="50%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#0f8f8c"/>
+    </linearGradient>
+    <linearGradient id="logoLine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="logoCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#a5b4fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="10" fill="url(#logoBg)"/>
+  <path d="M8 28.5L17 7V28.5" stroke="url(#logoLine)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12 18H17" stroke="url(#logoLine)" stroke-width="2.7" stroke-linecap="round"/>
+  <path d="M17 7H22C25.5 7 28 9.5 28 12.5C28 15.5 25.5 18 22 18H17" stroke="url(#logoLine)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 18L27.5 28.5" stroke="url(#logoCyan)" stroke-width="2.7" stroke-linecap="round"/>
+  <circle cx="17" cy="7" r="1.8" fill="#38bdf8"/>
+</svg>
