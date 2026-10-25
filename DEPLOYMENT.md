@@ -16,7 +16,7 @@ This is the easiest and best method because Vercel will automatically redeploy w
      git add .
      git commit -m "feat: complete portfolio with 3D card flips and vercel configuration"
      git branch -M main
-     git remote add origin https://github.com/ANMOLRAWAT990/portfolio.git
+     git remote add origin https://github.com/ANMOLRAWAT990/Portfolio.git
      git push -u origin main
      ```
 
