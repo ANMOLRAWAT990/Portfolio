@@ -1,0 +1,18 @@
+{
+  "name": "anmol-rawat-portfolio",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Portfolio of Anmol Rawat – ML-oriented Software Engineer",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "machine-learning",
+    "software-engineer",
+    "vercel"
+  ],
+  "author": "Anmol Rawat",
+  "license": "MIT"
+}
