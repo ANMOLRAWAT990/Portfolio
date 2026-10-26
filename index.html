@@ -80,9 +80,11 @@ h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;font-variation-settings:"wdt
 [data-theme=space] .tg .sp-icon{display:block;animation:orbitSpin 10s linear infinite}
 @keyframes orbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 /* space theme component overrides */
-:root[data-theme=space] .card,:root[data-theme=space] .fc,:root[data-theme=space] .pr,:root[data-theme=space] .er,:root[data-theme=space] .cert{background:color-mix(in srgb,var(--sf) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:#22325c;box-shadow:0 8px 32px -8px rgba(3,7,26,.7),0 0 0 1px rgba(184,124,248,.12)}
-:root[data-theme=space] .card:hover,:root[data-theme=space] .pc:hover:not([data-o=true]) .fl{box-shadow:0 18px 45px -10px rgba(184,124,248,.35),0 0 20px rgba(56,189,248,.25),0 0 0 1px rgba(184,124,248,.5);border-color:rgba(184,124,248,.6)}
+:root[data-theme=space] .card,:root[data-theme=space] .fc,:root[data-theme=space] .pr,:root[data-theme=space] .er,:root[data-theme=space] .cert{background:color-mix(in srgb,var(--sf) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:#22325c;box-shadow:0 8px 32px -8px rgba(3,7,26,.7),0 0 0 1px rgba(184,124,248,.12)}
+:root[data-theme=space] .card:hover,:root[data-theme=space] .pc:hover:not([data-o=true]) .fl{box-shadow:0 18px 45px -10px rgba(184,124,248,.35),0 0 24px rgba(56,189,248,.25),0 0 0 1px rgba(184,124,248,.6);border-color:rgba(184,124,248,.6)}
 :root[data-theme=space] .nav{background:rgba(8,14,34,.84);border-color:rgba(184,124,248,.35);box-shadow:0 8px 30px rgba(0,0,0,.6),0 0 15px rgba(184,124,248,.2)}
+:root[data-theme=space] .btn{border-color:rgba(192,132,252,.35);background:rgba(10,16,42,.85);color:#f1f5fd}
+:root[data-theme=space] .btn:hover{border-color:#c084fc;box-shadow:0 0 18px rgba(192,132,252,.35)}
 :root[data-theme=space] .btn.fill{background:linear-gradient(135deg,#a855f7,#6366f1);border-color:#c084fc;box-shadow:0 0 20px -2px rgba(168,85,247,.5)}
 :root[data-theme=space] .btn.fill:hover{box-shadow:0 0 26px rgba(168,85,247,.7),0 0 14px rgba(56,189,248,.4)}
 :root[data-theme=space] .band{background:rgba(6,10,26,.65);border-block-color:#1e294b}
@@ -90,13 +92,104 @@ h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;font-variation-settings:"wdt
 :root[data-theme=space] .mi{border-color:#24335c;background:rgba(8,14,34,.85);box-shadow:0 2px 10px rgba(0,0,0,.3)}
 :root[data-theme=space] .tb{background:rgba(184,124,248,.15);border-color:rgba(184,124,248,.35);color:#d8b4fe}
 :root[data-theme=space] .tb:hover{background:rgba(184,124,248,.28);box-shadow:0 0 14px rgba(184,124,248,.35)}
-/* black hole interactive button */
-.bh-btn{position:relative;display:inline-flex;align-items:center;gap:.55rem;font:600 .95rem var(--b);border-radius:999px;padding:.75rem 1.35rem;border:1.5px solid var(--ac);background:color-mix(in srgb,var(--tint) 60%,transparent);color:var(--tx);cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s}
-.bh-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px color-mix(in srgb,var(--ac) 45%,transparent)}
-.bh-spark{width:.72rem;height:.72rem;border-radius:50%;background:radial-gradient(circle,#fff 20%,var(--ac) 85%);box-shadow:0 0 8px var(--ac);animation:bhPulse 2s infinite ease-in-out}
-@keyframes bhPulse{0%,100%{transform:scale(.85);box-shadow:0 0 6px var(--ac)}50%{transform:scale(1.25);box-shadow:0 0 14px #38bdf8,0 0 20px var(--ac)}}
-:root[data-theme=space] .bh-btn{border-color:#c084fc;background:linear-gradient(135deg,rgba(168,85,247,.22),rgba(56,189,248,.18));box-shadow:0 0 18px rgba(192,132,252,.45)}
-:root[data-theme=space] .bh-btn:hover{box-shadow:0 0 26px rgba(192,132,252,.75),0 0 12px #38bdf8}
+/* Stellar Evolution HUD */
+.cosmos-hud{display:none;position:absolute;right:2rem;bottom:2rem;z-index:10;align-items:center;gap:.9rem;background:rgba(9,15,38,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(192,132,252,.35);border-radius:999px;padding:.5rem .7rem .5rem 1.1rem;box-shadow:0 12px 35px rgba(0,0,0,.65),0 0 25px rgba(168,85,247,.25);cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+:root[data-theme=space] .cosmos-hud{display:flex}
+.cosmos-hud:hover{transform:translateY(-2px);border-color:#c084fc;box-shadow:0 16px 45px rgba(168,85,247,.45),0 0 25px rgba(56,189,248,.35)}
+.hud-core{display:flex;align-items:center;gap:.75rem}
+.hud-phase-icon{font-size:1.45rem;line-height:1;animation:iconPulse 2s infinite ease-in-out}
+@keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.hud-info{display:grid;gap:.1rem}
+.hud-label{font:700 .65rem var(--b);color:#94a3c8;letter-spacing:.09em;text-transform:uppercase}
+.hud-title{font:700 .9rem var(--d);color:#f1f5fd;white-space:nowrap}
+.hud-sub{font:600 .68rem monospace;color:#38bdf8;letter-spacing:.04em;white-space:nowrap}
+.hud-actions{display:flex;align-items:center;gap:.4rem}
+.hud-btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;transition:transform .15s,filter .15s,background .2s,border-color .2s}
+.hud-sound{width:2.1rem;height:2.1rem;background:rgba(18,28,64,.85);border:1px solid rgba(192,132,252,.3);color:#c084fc}
+.hud-sound:hover{transform:scale(1.08);border-color:#38bdf8;color:#38bdf8;box-shadow:0 0 12px rgba(56,189,248,.4)}
+.hud-sound.active{background:linear-gradient(135deg,#a855f7,#06b6d4);color:#fff;border-color:#38bdf8;box-shadow:0 0 16px rgba(56,189,248,.6)}
+.hud-sound svg{width:.95rem;height:.95rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hud-next{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;font:700 .78rem var(--b);color:#fff;background:linear-gradient(135deg,#a855f7,#6366f1);padding:.38rem .85rem;border-radius:999px;box-shadow:0 0 14px rgba(168,85,247,.45);transition:transform .15s,filter .15s}
+.hud-next:hover{filter:brightness(1.15);transform:scale(1.05);box-shadow:0 0 20px rgba(168,85,247,.7)}
+.hud-next svg{width:.85rem;height:.85rem;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:860px){.cosmos-hud{right:1rem;bottom:1rem;padding:.35rem .5rem .35rem .75rem}.hud-label,.hud-sub{display:none}}
+
+/* deep space simulation components & animations */
+:root[data-theme=space] .tl:before{background:linear-gradient(180deg,#38bdf8,#a855f7,#f472b6);box-shadow:0 0 12px rgba(56,189,248,.5)}
+:root[data-theme=space] .tl li:before{background:#c084fc;box-shadow:0 0 0 4px #1c133a,0 0 16px #c084fc;animation:radarPing 2.5s infinite}
+@keyframes radarPing{0%{box-shadow:0 0 0 0 rgba(192,132,252,.8),0 0 12px #c084fc}70%{box-shadow:0 0 0 10px rgba(192,132,252,0),0 0 22px #c084fc}100%{box-shadow:0 0 0 0 rgba(192,132,252,0),0 0 12px #c084fc}}
+:root[data-theme=space] .chip{border-color:#283966;background:rgba(9,15,38,.8);color:#e2e8f0}
+:root[data-theme=space] .chip:hover{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,.3)}
+:root[data-theme=space] .chip[aria-pressed=true]{background:linear-gradient(135deg,#a855f7,#3b82f6);border-color:#c084fc;color:#fff;box-shadow:0 0 20px rgba(168,85,247,.45)}
+:root[data-theme=space] .sb{background:rgba(11,18,46,.85);border-color:#2b3d70;color:#f1f5fd}
+:root[data-theme=space] .sb em{background:rgba(192,132,252,.22);color:#e9d5ff}
+:root[data-theme=space] .sb:hover{border-color:#c084fc;box-shadow:0 0 18px rgba(192,132,252,.4);transform:translateY(-2px)}
+:root[data-theme=space] .sb[aria-pressed=true]{background:linear-gradient(135deg,#a855f7,#6366f1);border-color:#c084fc;box-shadow:0 0 24px rgba(168,85,247,.6)}
+:root[data-theme=space] .sb[aria-pressed=true] em{background:#fff;color:#7e22ce}
+:root[data-theme=space] .ss{border-color:rgba(147,197,253,.3);color:#94a3c8;background:rgba(8,14,34,.5)}
+:root[data-theme=space] .sg h3{color:#c084fc;letter-spacing:.05em}
+:root[data-theme=space] .tab{border-color:#283966;background:rgba(12,20,50,.7);color:#e2e8f0}
+:root[data-theme=space] .tab i{background:rgba(192,132,252,.2);color:#e9d5ff}
+:root[data-theme=space] .tab[aria-selected=true]{background:linear-gradient(135deg,#a855f7,#3b82f6);border-color:#c084fc;box-shadow:0 0 20px rgba(168,85,247,.5)}
+:root[data-theme=space] .ix{background:linear-gradient(135deg,rgba(30,20,60,.7),rgba(15,30,65,.7));border:1px solid rgba(192,132,252,.25)}
+:root[data-theme=space] .pb{background:#182548}
+:root[data-theme=space] .pb i{background:linear-gradient(90deg,#38bdf8,#a855f7,#f472b6,#38bdf8);background-size:200% 100%;animation:warpSpeed 2.2s linear infinite;box-shadow:0 0 14px #a855f7}
+@keyframes warpSpeed{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+:root[data-theme=space] .pc.ft .fc{border-color:rgba(192,132,252,.5);box-shadow:0 0 25px -4px rgba(168,85,247,.3),inset 0 0 15px rgba(56,189,248,.08)}
+:root[data-theme=space] .met div{background:rgba(14,23,54,.75);border:1px solid rgba(56,189,248,.25);border-radius:10px;padding:.4rem .6rem;box-shadow:inset 0 0 8px rgba(56,189,248,.1)}
+:root[data-theme=space] .met div b{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.6);font-family:monospace}
+:root[data-theme=space] .tgs span{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.32);color:#e9d5ff}
+:root[data-theme=space] .lg{color:#38bdf8}
+:root[data-theme=space] .lg i{background:#38bdf8;box-shadow:0 0 10px #38bdf8,0 0 20px #38bdf8}
+:root[data-theme=space] .avail{background:rgba(12,20,48,.8);border:1px solid rgba(56,189,248,.35);padding:.4rem 1rem;border-radius:999px;color:#cbd5e1;box-shadow:0 0 18px rgba(56,189,248,.2);display:inline-flex}
+:root[data-theme=space] .avail i{background:#2dd4bf;box-shadow:0 0 8px #2dd4bf,0 0 16px #2dd4bf}
+:root[data-theme=space] .glow{background:radial-gradient(circle,rgba(168,85,247,.22),rgba(56,189,248,.12) 40%,transparent 70%)}
+:root[data-theme=space] .prog{background:linear-gradient(90deg,#38bdf8,#a855f7,#f472b6);box-shadow:0 0 10px rgba(168,85,247,.8)}
+:root[data-theme=space] .lv{background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:#38bdf8}
+:root[data-theme=space] .lv:hover{background:rgba(56,189,248,.3);box-shadow:0 0 14px rgba(56,189,248,.5)}
+:root[data-theme=space] .mq-wrap{border-top:1px solid rgba(56,189,248,.2);border-bottom:1px solid rgba(168,85,247,.2);background:radial-gradient(ellipse at 50% 50%,rgba(24,18,52,.45),transparent)}
+:root[data-theme=space] .act{background:rgba(168,85,247,.25);border:1px solid rgba(168,85,247,.5);color:#f1f5fd}
+:root[data-theme=space] .pl a{border-color:rgba(192,132,252,.3);background:rgba(12,20,50,.8);color:#e2e8f0}
+:root[data-theme=space] .pl a:hover{border-color:#c084fc;box-shadow:0 0 14px rgba(192,132,252,.4);color:#fff}
+:root[data-theme=space] .pl-live{background:linear-gradient(135deg,#a855f7,#3b82f6)!important;border-color:#c084fc!important;color:#fff!important}
+:root[data-theme=space] .cert{border-color:rgba(56,189,248,.3);box-shadow:0 12px 35px -8px rgba(3,7,26,.8),0 0 25px rgba(56,189,248,.15)}
+:root[data-theme=space] .cimg{border-color:rgba(192,132,252,.35);box-shadow:0 0 20px rgba(168,85,247,.2)}
+:root[data-theme=space] .cert .id{background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);color:#38bdf8}
+:root[data-theme=space] .er .sc2{background:linear-gradient(135deg,#c084fc,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+:root[data-theme=space] .mail{background:linear-gradient(135deg,#c084fc,#38bdf8,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;border-bottom-color:#c084fc}
+:root[data-theme=space] .foot{border-top:1px solid #1a254a}
+
+/* Aerospace HUD Reticle Brackets on Interactive Cards */
+:root[data-theme=space] .pc .fc:before,
+:root[data-theme=space] .card:before,
+:root[data-theme=space] .er:before,
+:root[data-theme=space] .cert:before{content:"";position:absolute;top:8px;left:8px;width:12px;height:12px;border-top:2px solid #38bdf8;border-left:2px solid #38bdf8;border-radius:4px 0 0 0;pointer-events:none;opacity:.65;transition:opacity .3s,border-color .3s,box-shadow .3s}
+:root[data-theme=space] .pc .fc:after,
+:root[data-theme=space] .card:after,
+:root[data-theme=space] .er:after,
+:root[data-theme=space] .cert:after{content:"";position:absolute;bottom:8px;right:8px;width:12px;height:12px;border-bottom:2px solid #c084fc;border-right:2px solid #c084fc;border-radius:0 0 4px 0;pointer-events:none;opacity:.65;transition:opacity .3s,border-color .3s,box-shadow .3s}
+:root[data-theme=space] .pc:hover .fc:before,
+:root[data-theme=space] .card:hover:before,
+:root[data-theme=space] .er:hover:before,
+:root[data-theme=space] .cert:hover:before{opacity:1;box-shadow:-2px -2px 10px rgba(56,189,248,.8)}
+:root[data-theme=space] .pc:hover .fc:after,
+:root[data-theme=space] .card:hover:after,
+:root[data-theme=space] .er:hover:after,
+:root[data-theme=space] .cert:hover:after{opacity:1;box-shadow:2px 2px 10px rgba(192,132,252,.8)}
+
+/* Zero-G Micro-Levitation for Orbital Project Modules */
+@keyframes zeroGravFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+:root[data-theme=space] .pc:nth-child(odd){animation:zeroGravFloat 6.5s ease-in-out infinite}
+:root[data-theme=space] .pc:nth-child(even){animation:zeroGravFloat 7.5s ease-in-out infinite 1.8s}
+:root[data-theme=space] .pc:hover{animation-play-state:paused}
+
+/* Space Simulation Section Headers */
+:root[data-theme=space] #projects h2:before{content:"MODULE MATRIX // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
+:root[data-theme=space] #experience h2:before{content:"FLIGHT LOG // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
+:root[data-theme=space] #skills h2:before{content:"ORBITAL SUBSYSTEMS // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
+:root[data-theme=space] #process h2:before{content:"LAUNCH PROTOCOL // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
+:root[data-theme=space] #education h2:before{content:"OBSERVATORY ARCHIVE // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
+:root[data-theme=space] #contact h2:before{content:"SUBSPACE TRANSCEIVER // ";font-size:.62em;color:#38bdf8;font-family:monospace;letter-spacing:.05em}
 
 /* hero */
 .hero{position:relative;padding:8.5rem 0 5rem;overflow:hidden;min-height:min(44rem,100svh);display:flex;align-items:center}
@@ -329,11 +422,29 @@ h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;font-variation-settings:"wdt
     <div>
       <h1 id="nm">Anmol Rawat</h1>
       <p class="role">Building ML systems and full-stack products</p>
-      <p class="s">I turn specs into deployed products with ML, LLM pipelines and modern tooling, and I verify every claim before it ships.</p>
-      <div class="btns"><a class="btn fill" href="#projects">View projects</a><a class="btn" href="assets/Anmol-Rawat-Resume.pdf" target="_blank" rel="noopener">Open resume</a><button class="btn bh-btn" id="bhBtn" type="button" aria-label="Activate or interact with the Black Hole singularity"><span class="bh-spark"></span><span class="bh-txt">Constellation &amp; Black Hole</span></button></div>
+      <div class="btns"><a class="btn fill" href="#projects">View projects</a><a class="btn" href="assets/Anmol-Rawat-Resume.pdf" target="_blank" rel="noopener">Open resume</a></div>
       <p class="avail"><i></i>Open to ML-oriented software roles and internships</p>
     </div>
+  </div>
+  <div class="cosmos-hud" id="cosmosHud" role="status" aria-label="Stellar Simulation Telemetry HUD">
+    <div class="hud-core">
+      <span class="hud-phase-icon" id="hudIcon">☀️</span>
+      <div class="hud-info">
+        <span class="hud-label">STELLAR SIMULATION // TELEMETRY</span>
+        <b class="hud-title" id="hudTitle">Protostar &amp; Exoplanets</b>
+        <span class="hud-sub" id="hudSub">CORE: 5,778 K • 4 ORBITING WORLDS</span>
+      </div>
     </div>
+    <div class="hud-actions">
+      <button class="hud-btn hud-sound" id="hudSound" title="Toggle Cosmic Subspace Synthesizer Audio" aria-label="Toggle Cosmic Audio">
+        <svg id="sndIcon" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path class="snd-wave" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+      <button class="hud-next" id="hudNext" title="Advance stellar lifecycle phase" aria-label="Evolve cosmic phase">
+        <span>Evolve</span>
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
 </section>
 
 <div class="wrap mq-wrap"><div class="mq" aria-hidden="true"><div class="mr"></div><div class="mr"></div></div></div>
@@ -447,14 +558,118 @@ function say(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);t
 var C={ac:'#3a4fe0',warm:'#e08a00',ok:'#16895c',bad:'#c93a54',tl:'#0f8f8c',pk:'#d02f6b',tx:'#0e1424'},sv=0;
 function readC(){var cs=getComputedStyle(root);['ac','warm','ok','bad','tl','pk','tx'].forEach(function(k){var v=cs.getPropertyValue('--'+k).trim();if(v)C[k]=v})}
 var THEMES=['light','dark','space'];
-var bhBtn=$('#bhBtn');
-function updateBhBtn(){
-  if(!bhBtn)return;
-  var isSp=root.getAttribute('data-theme')==='space';
-  bhBtn.classList.toggle('active',isSp);
-  var txt=$('.bh-txt',bhBtn);
-  if(txt)txt.textContent=isSp?'🕳️ Singularity (Click to Warp)':'🌌 Space & Constellation';
+
+var STELLAR_PHASES=[
+  {id:0,icon:'☀️',name:'Protostar & Exoplanets',desc:'CORE: 5,778 K • 4 ORBITING WORLDS • G-TYPE STABLE'},
+  {id:1,icon:'🔥',name:'Red Supergiant Expansion',desc:'RADIUS: 1.8 AU • 3,200 K • CORONAL MASS EJECTIONS'},
+  {id:2,icon:'💥',name:'Supernova Detonation',desc:'BLAST: 12,000 KM/S • RELATIVISTIC SHOCKWAVE'},
+  {id:3,icon:'🕳️',name:'Black Hole Singularity',desc:'EVENT HORIZON: 30 KM • ACCRETION: RELATIVISTIC'},
+  {id:4,icon:'🌌',name:'Pinwheel Spiral Galaxy',desc:'DIAMETER: 100 KLY • DUAL LOGARITHMIC ARMS'}
+];
+var currentPhase=0;
+function updateHud(){
+  var p=STELLAR_PHASES[currentPhase];
+  var ico=$('#hudIcon'),tit=$('#hudTitle'),sub=$('#hudSub');
+  if(ico)ico.textContent=p.icon;
+  if(tit)tit.textContent=p.name;
+  if(sub)sub.textContent=p.desc;
 }
+
+/* Cosmic Space Simulation Web Audio Synthesizer */
+var audioEnabled=false,actx=null;
+function getAudio(){
+  if(!actx){
+    var AC=window.AudioContext||window.webkitAudioContext;
+    if(AC)actx=new AC();
+  }
+  if(actx&&actx.state==='suspended')actx.resume();
+  return actx;
+}
+function playCosmicTone(type,phase){
+  if(!audioEnabled)return;
+  var ctx=getAudio();
+  if(!ctx)return;
+  var now=ctx.currentTime;
+  try{
+    if(type==='evolve'){
+      var freqs=[
+        [261.63,329.63,392.00,523.25],
+        [196.00,246.94,293.66,392.00],
+        [146.83,220.00,277.18,440.00],
+        [65.41,110.00,164.81,220.00],
+        [329.63,440.00,554.37,659.25]
+      ][phase||0];
+      freqs.forEach(function(f,idx){
+        var osc=ctx.createOscillator();
+        var gain=ctx.createGain();
+        osc.type=phase===3?'sawtooth':'sine';
+        osc.frequency.setValueAtTime(f,now+idx*0.06);
+        gain.gain.setValueAtTime(0,now+idx*0.06);
+        gain.gain.linearRampToValueAtTime(0.06/(idx+1),now+idx*0.06+0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001,now+idx*0.06+1.1);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now+idx*0.06);
+        osc.stop(now+idx*0.06+1.2);
+      });
+    }else if(type==='gravPulse'){
+      var osc=ctx.createOscillator();
+      var gain=ctx.createGain();
+      osc.type='sine';
+      osc.frequency.setValueAtTime(140,now);
+      osc.frequency.exponentialRampToValueAtTime(36,now+0.55);
+      gain.gain.setValueAtTime(0.1,now);
+      gain.gain.exponentialRampToValueAtTime(0.001,now+0.6);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now+0.65);
+    }else if(type==='hover'){
+      var osc=ctx.createOscillator();
+      var gain=ctx.createGain();
+      osc.type='sine';
+      osc.frequency.setValueAtTime(1100+Math.random()*350,now);
+      gain.gain.setValueAtTime(0.015,now);
+      gain.gain.exponentialRampToValueAtTime(0.0001,now+0.035);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now+0.04);
+    }
+  }catch(e){}
+}
+window.playCosmicTone=playCosmicTone;
+
+var hudSound=$('#hudSound');
+if(hudSound){
+  hudSound.onclick=function(e){
+    e.stopPropagation();
+    audioEnabled=!audioEnabled;
+    hudSound.classList.toggle('active',audioEnabled);
+    if(audioEnabled){
+      getAudio();
+      playCosmicTone('evolve',currentPhase);
+      say('Cosmic Audio Synthesizer: ON 🔊');
+    }else{
+      say('Cosmic Audio Synthesizer: MUTED 🔇');
+    }
+  };
+}
+
+function advanceCosmicPhase(explicitPhase){
+  if(typeof explicitPhase==='number')currentPhase=explicitPhase%STELLAR_PHASES.length;
+  else currentPhase=(currentPhase+1)%STELLAR_PHASES.length;
+  updateHud();
+  playCosmicTone('evolve',currentPhase);
+  if(window.triggerStellarEvolution){
+    window.triggerStellarEvolution(currentPhase);
+  }
+}
+window.advanceCosmicPhase=advanceCosmicPhase;
+var hudNext=$('#hudNext'),cosmosHud=$('#cosmosHud');
+if(hudNext)hudNext.onclick=function(e){e.stopPropagation();advanceCosmicPhase();};
+if(cosmosHud)cosmosHud.onclick=function(){advanceCosmicPhase();};
+
 function setT(t,save){
   if(THEMES.indexOf(t)===-1)t='light';
   root.setAttribute('data-theme',t);
@@ -462,10 +677,10 @@ function setT(t,save){
   if(tc)tc.setAttribute('content',t==='space'?'#03050f':(t==='dark'?'#0a0d16':'#f1f3f8'));
   $('#tg').setAttribute('aria-label','Current theme: '+t+'. Click to switch.');
   readC();
-  updateBhBtn();
+  updateHud();
   if(save){
     try{localStorage.setItem('theme',t)}catch(e){}
-    if(t==='space')say('Space & Constellation Theme 🌌 Singularity Active');
+    if(t==='space')say('Space & Constellation Theme 🌌 Stellar Engine Active');
     else if(t==='dark')say('Dark Theme 🌙');
     else say('Light Theme ☀️');
   }
@@ -478,16 +693,6 @@ function cycleTheme(){
   setT(next,true);
 }
 $('#tg').onclick=cycleTheme;
-if(bhBtn){
-  bhBtn.onclick=function(){
-    if(root.getAttribute('data-theme')!=='space'){
-      setT('space',true);
-    }else if(window.triggerGravWave){
-      window.triggerGravWave(true);
-      say('Gravitational shockwave emitted! 🕳️✨');
-    }
-  };
-}
 
 /* hero name */
 (function(){var h=$('#nm'),t=h.textContent,i=0;h.setAttribute('aria-label',t);h.textContent='';
@@ -502,25 +707,102 @@ addEventListener('pointermove',function(e){
 },{passive:true});
 document.addEventListener('pointerleave',function(){glow.classList.remove('on')});
 
-/* hero network and space constellation black hole simulation */
+/* hero network and space stellar lifecycle simulation */
 (function(){
 var cv=$('#net'),cx=cv.getContext('2d'),hero=$('#top'),W=0,H=0,pts=[],rip=[],flashes=[],m={x:-999,y:-999},live=false,raf=0;
-var bh={x:0,y:0,tx:0,ty:0,rEH:32,mass:1600,angle:0,pulse:0,isDragging:false};
-var diskStars=[];
 
+// Celestial core state
+var star={
+  x:0,y:0,tx:0,ty:0,
+  r:24,tr:24,
+  pulse:0,
+  phase:0,
+  time:0,
+  snTimer:0,
+  snBlastR:0
+};
+
+// 4 Exoplanets for Protostar and Red Giant phases
+var planets=[
+  {
+    name:'Hermes',dist:52,baseDist:52,spd:0.042,ang:0.6,r:3.2,
+    col:'#f97316',trail:[],absorbed:false
+  },
+  {
+    name:'Terra Nova',dist:96,baseDist:96,spd:0.024,ang:2.4,r:5.4,
+    col:'#38bdf8',moon:{dist:12,spd:0.08,ang:0,r:1.7,col:'#e2e8f0'},trail:[],absorbed:false
+  },
+  {
+    name:'Kronos',dist:154,baseDist:154,spd:0.013,ang:4.7,r:8.8,
+    col:'#fbbf24',ring:{rIn:11,rOut:20,tilt:-0.36},trail:[],absorbed:false
+  },
+  {
+    name:'Comet Astraea',dist:218,baseDist:218,spd:0.0075,ang:1.6,r:3.5,
+    col:'#93c5fd',isComet:true,trail:[],absorbed:false
+  }
+];
+
+// Supernova explosion nebula filaments
+var nebula=[];
+function initNebula(cx0,cy0){
+  nebula=[];
+  var cols=['#ffffff','#38bdf8','#c084fc','#f472b6','#fbbf24','#818cf8'];
+  for(var k=0;k<85;k++){
+    var ang=Math.random()*6.283;
+    var spd=1.8+Math.random()*6.8;
+    nebula.push({
+      x:cx0,y:cy0,
+      vx:Math.cos(ang)*spd,
+      vy:Math.sin(ang)*spd,
+      r:3+Math.random()*14,
+      maxR:26+Math.random()*46,
+      a:0.9+Math.random()*0.1,
+      decay:0.005+Math.random()*0.007,
+      col:cols[Math.floor(Math.random()*cols.length)]
+    });
+  }
+}
+
+// Accretion disk particles for Black Hole (Phase 3)
+var diskStars=[];
 function initDisk(){
   diskStars=[];
-  for(var k=0;k<65;k++){
+  for(var k=0;k<70;k++){
     diskStars.push({
-      r:1.15+Math.random()*2.2,
+      r:1.15+Math.random()*2.25,
       ang:Math.random()*6.283,
-      spd:0.035+Math.random()*0.045,
+      spd:0.032+Math.random()*0.048,
       size:1+Math.random()*2.2,
       hue:Math.random()<.35?'#ffffff':(Math.random()<.65?'#38bdf8':(Math.random()<.85?'#c084fc':'#fbbf24'))
     });
   }
 }
 
+// Spiral galaxy stars (Phase 4)
+var galStars=[];
+function initGalaxy(){
+  galStars=[];
+  var count=240;
+  for(var k=0;k<count;k++){
+    var arm=k%2;
+    var t=(k/count)*Math.PI*4;
+    var dist=14+Math.pow(k/count,0.85)*210;
+    var ang=t+arm*Math.PI+(Math.random()-0.5)*0.38;
+    var spd=0.005+(38/(dist+50))*0.012;
+    var isH2=Math.random()<0.18;
+    var col=dist<45?(Math.random()<0.5?'#fef08a':'#fbbf24'):(isH2?'#f472b6':(Math.random()<0.65?'#38bdf8':'#e0e7ff'));
+    galStars.push({
+      dist:dist,
+      ang:ang,
+      spd:spd,
+      r:isH2?(2.2+Math.random()*1.8):(0.9+Math.random()*1.6),
+      col:col,
+      tw:Math.random()*6.283
+    });
+  }
+}
+
+// Background constellation stars
 function spawnStar(anywhere,isSp){
   var sx,sy;
   if(anywhere){
@@ -550,31 +832,70 @@ function size(){
   var isSp=root.getAttribute('data-theme')==='space';
   var defX=W>860?W*0.74:W*0.5;
   var defY=W>860?H*0.46:H*0.36;
-  if(!bh.x||!bh.tx){bh.x=defX;bh.y=defY;}
-  bh.tx=defX;bh.ty=defY;
-  bh.rEH=Math.max(26,Math.min(38,Math.min(W,H)*0.055));
+  if(!star.x||!star.tx){star.x=defX;star.y=defY;}
+  star.tx=defX;star.ty=defY;
   initDisk();
+  initGalaxy();
   var n=Math.round(Math.min(isSp?120:95,W*H/(isSp?10000:13000)));
   pts=[];for(var i=0;i<n;i++)pts.push(spawnStar(true,isSp));
   draw(0);
 }
 
+// Stellar Evolution controller function
+window.triggerStellarEvolution=function(newPhase){
+  if(typeof newPhase==='number')star.phase=newPhase%5;
+  else star.phase=(star.phase+1)%5;
+  star.pulse=1.6;
+  autoEvolveTimer=0;
+
+  if(star.phase===0){
+    // Protostar & Exoplanets
+    star.tr=24;
+    planets.forEach(function(p){p.dist=p.baseDist;p.absorbed=false;p.trail=[]});
+  }else if(star.phase===1){
+    // Red Supergiant
+    star.tr=70;
+  }else if(star.phase===2){
+    // Supernova
+    star.snTimer=0;
+    star.snBlastR=0;
+    star.tr=6;
+    initNebula(star.x,star.y);
+    rip.push({x:star.x,y:star.y,r:0,maxR:Math.max(W,H)*0.95,strength:3.5});
+    for(var f=0;f<20;f++){
+      flashes.push({x:star.x+(Math.random()-.5)*60,y:star.y+(Math.random()-.5)*60,r:3,maxR:30+Math.random()*35,a:1,c:'#ffffff'});
+    }
+  }else if(star.phase===3){
+    // Black Hole
+    star.tr=30;
+    initDisk();
+    rip.push({x:star.x,y:star.y,r:0,maxR:Math.max(W,H)*0.75,strength:2.2});
+  }else if(star.phase===4){
+    // Spiral Galaxy
+    star.tr=18;
+    initGalaxy();
+    rip.push({x:star.x,y:star.y,r:0,maxR:Math.max(W,H)*0.8,strength:2});
+  }
+};
+
 window.triggerGravWave=function(boost){
-  var gx=bh.x||W*0.5,gy=bh.y||H*0.5;
+  var gx=star.x||W*0.5,gy=star.y||H*0.5;
   rip.push({x:gx,y:gy,r:0,maxR:Math.max(W,H)*0.85,strength:boost?2.5:1.6});
-  bh.pulse=1.5;
+  star.pulse=1.5;
+  if(typeof playCosmicTone==='function')playCosmicTone('gravPulse');
   for(var f=0;f<8;f++){
     flashes.push({x:gx+(Math.random()-.5)*40,y:gy+(Math.random()-.5)*40,r:2,maxR:20+Math.random()*22,a:1,c:'#c084fc'});
   }
 };
 
+// Accretion disk rendering helper
 function drawAccretionDisk(isBack,curREH){
   var tilt=-0.32;
   var scaleY=0.36;
   var rIn=curREH*1.15;
   var rOut=curREH*3.4;
   cx.save();
-  cx.translate(bh.x,bh.y);
+  cx.translate(star.x,star.y);
   cx.rotate(tilt);
   cx.scale(1,scaleY);
   var startAng=isBack?Math.PI:0;
@@ -621,10 +942,13 @@ function drawAccretionDisk(isBack,curREH){
   cx.restore();
 }
 
+var autoEvolveTimer=0;
+
 function draw(step){
   cx.clearRect(0,0,W,H);
   var isSp=root.getAttribute('data-theme')==='space';
 
+  // --- LIGHT / DARK MODE: NEURAL NETWORK GRAPH ---
   if(!isSp){
     cx.fillStyle=C.ac;cx.strokeStyle=C.ac;cx.lineWidth=1;
     var i,j,p,q,dx,dy,d;
@@ -645,78 +969,101 @@ function draw(step){
     return;
   }
 
-  // ====== SPACE THEME: CONSTELLATIONS & BLACK HOLE SINGULARITY ======
-  bh.x+=(bh.tx-bh.x)*0.08;
-  bh.y+=(bh.ty-bh.y)*0.08;
-  bh.angle+=0.024;
-  if(bh.pulse>0)bh.pulse*=0.94;
-  var curREH=bh.rEH+bh.pulse*10;
+  // --- SPACE THEME: 5-PHASE STELLAR LIFECYCLE SIMULATION ---
+  star.time+=0.025;
+  star.x+=(star.tx-star.x)*0.08;
+  star.y+=(star.ty-star.y)*0.08;
+  star.r+=(star.tr-star.r)*0.06;
+  if(star.pulse>0)star.pulse*=0.94;
 
-  var lensGrad=cx.createRadialGradient(bh.x,bh.y,curREH*.8,bh.x,bh.y,curREH*3.8);
-  lensGrad.addColorStop(0,'rgba(192,132,252,.45)');
-  lensGrad.addColorStop(.25,'rgba(56,189,248,.26)');
-  lensGrad.addColorStop(.55,'rgba(147,51,234,.12)');
-  lensGrad.addColorStop(1,'rgba(3,5,15,0)');
-  cx.fillStyle=lensGrad;
-  cx.beginPath();cx.arc(bh.x,bh.y,curREH*3.8,0,6.283);cx.fill();
+  if(step){
+    autoEvolveTimer++;
+    if(autoEvolveTimer>1150){ // auto-evolve every ~19 seconds
+      autoEvolveTimer=0;
+      if(typeof advanceCosmicPhase==='function')advanceCosmicPhase();
+    }
+  }
 
-  drawAccretionDisk(true,curREH);
+  var curR=star.r+star.pulse*12;
 
+  // 1. Render Background Constellation Stars & Physics
   var i,j,p,q,dx,dy,d;
   for(i=0;i<pts.length;i++){
     p=pts[i];
     if(step){
       p.tw+=p.twSp;
-      dx=bh.x-p.x;dy=bh.y-p.y;d=Math.sqrt(dx*dx+dy*dy);
-      if(d<=curREH*1.15){
+      dx=star.x-p.x;dy=star.y-p.y;d=Math.sqrt(dx*dx+dy*dy);
+
+      // Supernova shockwave repulsion
+      if(star.phase===2&&star.snBlastR>0){
+        var blastDiff=Math.abs(d-star.snBlastR);
+        if(blastDiff<50&&d>1){
+          var kick=(1-blastDiff/50)*3.2;
+          p.vx-=(dx/d)*kick;p.vy-=(dy/d)*kick;
+        }
+      }
+
+      // Gravitational pull / accretion (stronger in Black Hole phase 3, moderate in others)
+      var coreMass=star.phase===3?1650:(star.phase===4?1200:500);
+      if(star.phase===3&&d<=curR*1.15){
         flashes.push({x:p.x,y:p.y,r:2,maxR:18+Math.random()*8,a:1,c:p.hue});
-        bh.pulse=Math.min(bh.pulse+0.16,1);
+        star.pulse=Math.min(star.pulse+0.16,1);
         pts[i]=spawnStar(false,true);
         continue;
       }
-      var grav=Math.min(bh.mass/(d*d+650),2.2);
+      var grav=Math.min(coreMass/(d*d+650),star.phase===3?2.2:1.0);
       p.vx+=(dx/d)*grav;
       p.vy+=(dy/d)*grav;
+
+      // Swirl / tangential force
+      var swirl=star.phase===3?0.16:(star.phase===4?0.14:0.04);
       var tanForce=12/(Math.sqrt(d)+8);
-      p.vx+=(-dy/d)*tanForce*0.15;
-      p.vy+=(dx/d)*tanForce*0.15;
+      p.vx+=(-dy/d)*tanForce*swirl;
+      p.vy+=(dx/d)*tanForce*swirl;
+
+      // Pointer influence
       if(m.x>0){
         var mdx=m.x-p.x,mdy=m.y-p.y,md=Math.sqrt(mdx*mdx+mdy*mdy);
         if(md<180&&md>1){p.vx+=(mdx/md)*0.015;p.vy+=(mdy/md)*0.015;}
       }
+
+      // Ripples
       for(j=0;j<rip.length;j++){
         var rr=rip[j];var rdx=p.x-rr.x,rdy=p.y-rr.y,rd=Math.sqrt(rdx*rdx+rdy*rdy);
         if(rd>1&&Math.abs(rd-rr.r)<50){
-          var kick=(rr.strength||1)*0.45;
-          p.vx+=(rdx/rd)*kick;p.vy+=(rdy/rd)*kick;
+          var rk=(rr.strength||1)*0.45;
+          p.vx+=(rdx/rd)*rk;p.vy+=(rdy/rd)*rk;
         }
       }
+
       var sp=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
-      if(sp>2.8){p.vx*=2.8/sp;p.vy*=2.8/sp;}
+      if(sp>3.2){p.vx*=3.2/sp;p.vy*=3.2/sp;}
       p.vx*=0.982;p.vy*=0.982;
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<-30)p.x=W+30;if(p.x>W+30)p.x=-30;
       if(p.y<-30)p.y=H+30;if(p.y>H+30)p.y=-30;
     }
 
+    // Draw star
     var starAlpha=0.35+0.65*(Math.sin(p.tw)*0.5+0.5);
     cx.fillStyle=p.hue;cx.globalAlpha=starAlpha;
     cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();
 
+    // Constellation lines
     for(j=i+1;j<pts.length;j++){
       q=pts[j];dx=p.x-q.x;dy=p.y-q.y;d=dx*dx+dy*dy;
       if(d<11000){
         var midX=(p.x+q.x)*0.5,midY=(p.y+q.y)*0.5;
-        var bDist=Math.sqrt((bh.x-midX)*(bh.x-midX)+(bh.y-midY)*(bh.y-midY));
-        if(bDist>curREH*0.9){
-          var cAlpha=(1-Math.sqrt(d)/105)*0.38;
-          cx.strokeStyle=bDist<curREH*2.5?'#38bdf8':'#c084fc';
+        var bDist=Math.sqrt((star.x-midX)*(star.x-midX)+(star.y-midY)*(star.y-midY));
+        if(star.phase!==3||bDist>curR*0.9){
+          var cAlpha=(1-Math.sqrt(d)/105)*0.36;
+          cx.strokeStyle=bDist<curR*2.5?'#38bdf8':'#c084fc';
           cx.lineWidth=0.9;
           cx.globalAlpha=cAlpha;
           cx.beginPath();
-          if(bDist<curREH*2.5){
-            var warpX=midX+(bh.x-midX)*0.25;
-            var warpY=midY+(bh.y-midY)*0.25;
+          if(star.phase===3&&bDist<curR*2.5){
+            var warpX=midX+(star.x-midX)*0.25;
+            var warpY=midY+(star.y-midY)*0.25;
             cx.moveTo(p.x,p.y);
             cx.quadraticCurveTo(warpX,warpY,q.x,q.y);
           }else{
@@ -728,20 +1075,300 @@ function draw(step){
     }
   }
 
-  cx.save();
-  cx.translate(bh.x,bh.y);
-  cx.strokeStyle='rgba(255,255,255,.95)';
-  cx.lineWidth=2.5;
-  cx.shadowColor='#38bdf8';
-  cx.shadowBlur=16;
-  cx.beginPath();cx.arc(0,0,curREH*1.08,0,6.283);cx.stroke();
-  cx.shadowBlur=0;
-  cx.fillStyle='#000000';
-  cx.beginPath();cx.arc(0,0,curREH,0,6.283);cx.fill();
-  cx.restore();
+  // 2. Render Specific Phase Object
+  if(star.phase===0){
+    // ====== PHASE 0: PROTOSTAR & EXOPLANETS ======
+    // Draw orbit paths
+    for(var k=0;k<planets.length;k++){
+      var pl=planets[k];
+      cx.save();
+      cx.translate(star.x,star.y);
+      cx.scale(1,0.72);
+      cx.strokeStyle='rgba(148,163,200,0.12)';
+      cx.lineWidth=1;
+      cx.beginPath();cx.arc(0,0,pl.dist,0,6.283);cx.stroke();
+      cx.restore();
+    }
 
-  drawAccretionDisk(false,curREH);
+    // Solar Corona & Radiant Glow
+    var coronaGrad=cx.createRadialGradient(star.x,star.y,curR*0.5,star.x,star.y,curR*3.2);
+    coronaGrad.addColorStop(0,'rgba(254,240,138,0.7)');
+    coronaGrad.addColorStop(0.35,'rgba(245,158,11,0.3)');
+    coronaGrad.addColorStop(0.7,'rgba(234,88,12,0.1)');
+    coronaGrad.addColorStop(1,'rgba(3,5,15,0)');
+    cx.fillStyle=coronaGrad;cx.globalAlpha=1;
+    cx.beginPath();cx.arc(star.x,star.y,curR*3.2,0,6.283);cx.fill();
 
+    // Solar Corona Ray spikes
+    cx.save();
+    cx.translate(star.x,star.y);
+    for(var rk=0;rk<8;rk++){
+      var rayAng=rk*(Math.PI/4)+star.time*0.5;
+      var rayLen=curR*(1.4+Math.sin(star.time*2+rk)*0.25);
+      cx.strokeStyle='rgba(254,240,138,0.35)';
+      cx.lineWidth=2;
+      cx.beginPath();
+      cx.moveTo(Math.cos(rayAng)*curR*0.8,Math.sin(rayAng)*curR*0.8);
+      cx.lineTo(Math.cos(rayAng)*rayLen,Math.sin(rayAng)*rayLen);
+      cx.stroke();
+    }
+    // Sun sphere
+    var sunGrad=cx.createRadialGradient(0,0,0,0,0,curR);
+    sunGrad.addColorStop(0,'#ffffff');
+    sunGrad.addColorStop(0.4,'#fef08a');
+    sunGrad.addColorStop(0.85,'#f59e0b');
+    sunGrad.addColorStop(1,'#d97706');
+    cx.fillStyle=sunGrad;
+    cx.shadowColor='#f59e0b';cx.shadowBlur=20;
+    cx.beginPath();cx.arc(0,0,curR,0,6.283);cx.fill();
+    cx.shadowBlur=0;
+    cx.restore();
+
+    // Draw Orbiting Exoplanets
+    for(var k=0;k<planets.length;k++){
+      var pl=planets[k];
+      if(step)pl.ang+=pl.spd;
+      var px=star.x+Math.cos(pl.ang)*pl.dist;
+      var py=star.y+Math.sin(pl.ang)*pl.dist*0.72;
+
+      // Comet tail
+      if(pl.isComet){
+        var tailLen=34;
+        var tailDx=Math.cos(pl.ang)*tailLen;
+        var tailDy=Math.sin(pl.ang)*tailLen*0.72;
+        var cometGrad=cx.createLinearGradient(px,py,px+tailDx,py+tailDy);
+        cometGrad.addColorStop(0,'rgba(147,197,253,0.8)');
+        cometGrad.addColorStop(1,'rgba(147,197,253,0)');
+        cx.strokeStyle=cometGrad;cx.lineWidth=pl.r*1.4;cx.lineCap='round';
+        cx.beginPath();cx.moveTo(px,py);cx.lineTo(px+tailDx,py+tailDy);cx.stroke();
+      }
+
+      // Planet sphere
+      cx.save();
+      cx.translate(px,py);
+
+      // Ring for Kronos (back)
+      if(pl.ring){
+        cx.save();
+        cx.rotate(pl.ring.tilt);
+        cx.scale(1,0.32);
+        cx.strokeStyle='rgba(251,191,36,0.55)';
+        cx.lineWidth=pl.ring.rOut-pl.ring.rIn;
+        cx.beginPath();
+        cx.arc(0,0,(pl.ring.rIn+pl.ring.rOut)*0.5,Math.PI,Math.PI*2);
+        cx.stroke();
+        cx.restore();
+      }
+
+      cx.fillStyle=pl.col;
+      cx.shadowColor=pl.col;cx.shadowBlur=10;
+      cx.beginPath();cx.arc(0,0,pl.r,0,6.283);cx.fill();
+      cx.shadowBlur=0;
+
+      // Ring for Kronos (front)
+      if(pl.ring){
+        cx.save();
+        cx.rotate(pl.ring.tilt);
+        cx.scale(1,0.32);
+        cx.strokeStyle='rgba(251,191,36,0.7)';
+        cx.lineWidth=pl.ring.rOut-pl.ring.rIn;
+        cx.beginPath();
+        cx.arc(0,0,(pl.ring.rIn+pl.ring.rOut)*0.5,0,Math.PI);
+        cx.stroke();
+        cx.restore();
+      }
+
+      // Moon for Terra Nova
+      if(pl.moon){
+        if(step)pl.moon.ang+=pl.moon.spd;
+        var mx=Math.cos(pl.moon.ang)*pl.moon.dist;
+        var my=Math.sin(pl.moon.ang)*pl.moon.dist*0.72;
+        cx.fillStyle=pl.moon.col;
+        cx.beginPath();cx.arc(mx,my,pl.moon.r,0,6.283);cx.fill();
+      }
+
+      cx.restore();
+    }
+
+  }else if(star.phase===1){
+    // ====== PHASE 1: RED SUPERGIANT EXPANSION ======
+    // Outer turbulent convective glow
+    var rgGrad=cx.createRadialGradient(star.x,star.y,curR*0.2,star.x,star.y,curR*2.6);
+    rgGrad.addColorStop(0,'rgba(255,237,213,0.85)');
+    rgGrad.addColorStop(0.35,'rgba(249,115,22,0.65)');
+    rgGrad.addColorStop(0.7,'rgba(220,38,38,0.3)');
+    rgGrad.addColorStop(1,'rgba(3,5,15,0)');
+    cx.fillStyle=rgGrad;cx.globalAlpha=1;
+    cx.beginPath();cx.arc(star.x,star.y,curR*2.6,0,6.283);cx.fill();
+
+    // Coronal mass ejections (CME prominence loops)
+    cx.save();
+    cx.translate(star.x,star.y);
+    for(var pm=0;pm<6;pm++){
+      var pAng=pm*(Math.PI/3)+star.time*0.2;
+      var pSpan=0.45;
+      var pAlt=curR*(1.25+Math.sin(star.time*3+pm)*0.18);
+      var midAng=pAng+pSpan*0.5;
+      var cpX=Math.cos(midAng)*pAlt;
+      var cpY=Math.sin(midAng)*pAlt;
+      cx.strokeStyle='rgba(248,113,113,0.6)';
+      cx.lineWidth=2.2;
+      cx.beginPath();
+      cx.moveTo(Math.cos(pAng)*curR*0.95,Math.sin(pAng)*curR*0.95);
+      cx.quadraticCurveTo(cpX,cpY,Math.cos(pAng+pSpan)*curR*0.95,Math.sin(pAng+pSpan)*curR*0.95);
+      cx.stroke();
+    }
+
+    // Supergiant turbulent sphere with granulations
+    var starGrad=cx.createRadialGradient(0,0,0,0,0,curR);
+    starGrad.addColorStop(0,'#ffffff');
+    starGrad.addColorStop(0.2,'#fed7aa');
+    starGrad.addColorStop(0.55,'#ea580c');
+    starGrad.addColorStop(0.85,'#dc2626');
+    starGrad.addColorStop(1,'#7f1d1d');
+    cx.fillStyle=starGrad;
+    cx.shadowColor='#dc2626';cx.shadowBlur=28;
+    cx.beginPath();cx.arc(0,0,curR,0,6.283);cx.fill();
+    cx.shadowBlur=0;
+    cx.restore();
+
+    // Planets reaction: Hermes is consumed, outer planets pushed back
+    for(var k=0;k<planets.length;k++){
+      var pl=planets[k];
+      if(k===0){
+        if(step&&Math.random()<0.2){
+          flashes.push({x:star.x+(Math.random()-.5)*curR,y:star.y+(Math.random()-.5)*curR,r:2,maxR:14,a:1,c:'#fb923c'});
+        }
+        continue;
+      }
+      if(step){
+        pl.ang+=pl.spd*0.8;
+        pl.dist+=(pl.baseDist*1.32-pl.dist)*0.03;
+      }
+      var px=star.x+Math.cos(pl.ang)*pl.dist;
+      var py=star.y+Math.sin(pl.ang)*pl.dist*0.72;
+      cx.fillStyle='#f87171';cx.globalAlpha=0.75;
+      cx.beginPath();cx.arc(px,py,pl.r,0,6.283);cx.fill();
+    }
+
+  }else if(star.phase===2){
+    // ====== PHASE 2: SUPERNOVA DETONATION ======
+    if(step){
+      star.snTimer++;
+      if(star.snTimer<35){
+        star.tr=5;
+      }else{
+        star.snBlastR+=8.5;
+      }
+    }
+
+    if(star.snTimer<35){
+      cx.save();
+      cx.translate(star.x,star.y);
+      cx.fillStyle='#ffffff';
+      cx.shadowColor='#38bdf8';cx.shadowBlur=35;
+      cx.beginPath();cx.arc(0,0,Math.max(4,curR),0,6.283);cx.fill();
+      cx.shadowBlur=0;
+      cx.restore();
+    }else{
+      var blastFade=Math.max(0,1-star.snBlastR/(Math.max(W,H)*0.95));
+      var flashGrad=cx.createRadialGradient(star.x,star.y,0,star.x,star.y,Math.max(20,star.snBlastR*0.4));
+      flashGrad.addColorStop(0,'rgba(255,255,255,'+(blastFade*0.9)+')');
+      flashGrad.addColorStop(0.3,'rgba(56,189,248,'+(blastFade*0.6)+')');
+      flashGrad.addColorStop(0.7,'rgba(192,132,252,'+(blastFade*0.3)+')');
+      flashGrad.addColorStop(1,'rgba(3,5,15,0)');
+      cx.fillStyle=flashGrad;cx.beginPath();cx.arc(star.x,star.y,Math.max(20,star.snBlastR*0.4),0,6.283);cx.fill();
+
+      // Relativistic Chromatic Shockwaves
+      if(star.snBlastR<Math.max(W,H)*0.95){
+        cx.strokeStyle='#38bdf8';cx.lineWidth=3;cx.globalAlpha=blastFade*0.8;
+        cx.beginPath();cx.arc(star.x,star.y,star.snBlastR,0,6.283);cx.stroke();
+        cx.strokeStyle='#c084fc';cx.lineWidth=2.5;cx.globalAlpha=blastFade*0.7;
+        cx.beginPath();cx.arc(star.x,star.y,star.snBlastR*0.82,0,6.283);cx.stroke();
+        cx.strokeStyle='#fbbf24';cx.lineWidth=2;cx.globalAlpha=blastFade*0.6;
+        cx.beginPath();cx.arc(star.x,star.y,star.snBlastR*0.65,0,6.283);cx.stroke();
+      }
+
+      // Expanding Nebula Remnant Filaments
+      for(var nb=0;nb<nebula.length;nb++){
+        var neb=nebula[nb];
+        if(step){
+          neb.x+=neb.vx;neb.y+=neb.vy;
+          neb.vx*=0.975;neb.vy*=0.975;
+          if(neb.r<neb.maxR)neb.r+=0.25;
+          neb.a-=neb.decay;
+        }
+        if(neb.a>0){
+          cx.fillStyle=neb.col;cx.globalAlpha=neb.a*0.38;
+          cx.beginPath();cx.arc(neb.x,neb.y,neb.r,0,6.283);cx.fill();
+        }
+      }
+    }
+
+  }else if(star.phase===3){
+    // ====== PHASE 3: BLACK HOLE SINGULARITY ======
+    var lensGrad=cx.createRadialGradient(star.x,star.y,curR*0.8,star.x,star.y,curR*3.8);
+    lensGrad.addColorStop(0,'rgba(192,132,252,.45)');
+    lensGrad.addColorStop(.25,'rgba(56,189,248,.26)');
+    lensGrad.addColorStop(.55,'rgba(147,51,234,.12)');
+    lensGrad.addColorStop(1,'rgba(3,5,15,0)');
+    cx.fillStyle=lensGrad;cx.beginPath();cx.arc(star.x,star.y,curR*3.8,0,6.283);cx.fill();
+
+    // 3D Accretion Disk (back half)
+    drawAccretionDisk(true,curR);
+
+    // Event Horizon & Einstein Photon Ring
+    cx.save();
+    cx.translate(star.x,star.y);
+    cx.strokeStyle='rgba(255,255,255,.95)';
+    cx.lineWidth=2.5;
+    cx.shadowColor='#38bdf8';
+    cx.shadowBlur=16;
+    cx.beginPath();cx.arc(0,0,curR*1.08,0,6.283);cx.stroke();
+    cx.shadowBlur=0;
+    cx.fillStyle='#000000';
+    cx.beginPath();cx.arc(0,0,curR,0,6.283);cx.fill();
+    cx.restore();
+
+    // 3D Accretion Disk (front half)
+    drawAccretionDisk(false,curR);
+
+  }else if(star.phase===4){
+    // ====== PHASE 4: PINWHEEL SPIRAL GALAXY ======
+    var galGrad=cx.createRadialGradient(star.x,star.y,0,star.x,star.y,curR*4.5);
+    galGrad.addColorStop(0,'rgba(254,240,138,0.9)');
+    galGrad.addColorStop(0.2,'rgba(192,132,252,0.45)');
+    galGrad.addColorStop(0.55,'rgba(56,189,248,0.22)');
+    galGrad.addColorStop(1,'rgba(3,5,15,0)');
+    cx.fillStyle=galGrad;cx.beginPath();cx.arc(star.x,star.y,curR*4.5,0,6.283);cx.fill();
+
+    cx.save();
+    cx.translate(star.x,star.y);
+    cx.fillStyle='#ffffff';
+    cx.shadowColor='#c084fc';cx.shadowBlur=20;
+    cx.beginPath();cx.arc(0,0,curR*0.7,0,6.283);cx.fill();
+    cx.shadowBlur=0;
+    cx.restore();
+
+    // Spiral Arms Stars & H II Starburst Regions
+    cx.save();
+    cx.translate(star.x,star.y);
+    for(var gk=0;gk<galStars.length;gk++){
+      var gs=galStars[gk];
+      if(step){
+        gs.ang+=gs.spd;
+        gs.tw+=0.04;
+      }
+      var gx=Math.cos(gs.ang)*gs.dist;
+      var gy=Math.sin(gs.ang)*gs.dist*0.58;
+      var twA=0.45+0.55*(Math.sin(gs.tw)*0.5+0.5);
+      cx.fillStyle=gs.col;cx.globalAlpha=twA;
+      cx.beginPath();cx.arc(gx,gy,gs.r,0,6.283);cx.fill();
+    }
+    cx.restore();
+  }
+
+  // 3. Render Flashes & Gravity Ripples
   for(j=flashes.length-1;j>=0;j--){
     var fl=flashes[j];
     fl.r+=step?1.4:0;fl.a-=step?0.045:0;
@@ -765,33 +1392,34 @@ function loop(){if(!live)return;draw(1);raf=requestAnimationFrame(loop)}
 size();
 if(reduce)return;
 
-var isDragBH=false;
+var isDragStar=false;
 hero.addEventListener('pointermove',function(e){
   var r=hero.getBoundingClientRect();
   m.x=e.clientX-r.left;m.y=e.clientY-r.top;
-  if(isDragBH&&root.getAttribute('data-theme')==='space'){
-    bh.tx=m.x;bh.ty=m.y;
+  if(isDragStar&&root.getAttribute('data-theme')==='space'){
+    star.tx=m.x;star.ty=m.y;
   }
 },{passive:true});
-hero.addEventListener('pointerleave',function(){m.x=m.y=-999;isDragBH=false;});
+hero.addEventListener('pointerleave',function(){m.x=m.y=-999;isDragStar=false;});
 hero.addEventListener('pointerdown',function(e){
-  if(e.target.closest('a,button,textarea,.demo'))return;
+  if(e.target.closest('a,button,textarea,.demo,#cosmosHud'))return;
   var r=hero.getBoundingClientRect();
   var px=e.clientX-r.left,py=e.clientY-r.top;
   if(root.getAttribute('data-theme')==='space'){
-    var dToBH=Math.sqrt((bh.x-px)*(bh.x-px)+(bh.y-py)*(bh.y-py));
-    if(dToBH<bh.rEH*2.2){
-      isDragBH=true;bh.pulse=1.3;
+    var dToStar=Math.sqrt((star.x-px)*(star.x-px)+(star.y-py)*(star.y-py));
+    if(dToStar<star.r*2.5){
+      isDragStar=true;star.pulse=1.3;
+      if(typeof advanceCosmicPhase==='function')advanceCosmicPhase();
     }else{
-      bh.tx=px;bh.ty=py;
+      star.tx=px;star.ty=py;
       rip.push({x:px,y:py,r:0,maxR:380,strength:1.8});
-      bh.pulse=0.8;
+      star.pulse=0.8;
     }
   }else{
     rip.push({x:px,y:py,r:0});
   }
 });
-addEventListener('pointerup',function(){isDragBH=false;});
+addEventListener('pointerup',function(){isDragStar=false;});
 new IntersectionObserver(function(en){var v=en[0].isIntersecting;if(v&&!live){live=true;loop()}else if(!v){live=false;cancelAnimationFrame(raf)}}).observe(hero);
 var rt;new ResizeObserver(function(){clearTimeout(rt);rt=setTimeout(size,150)}).observe(hero);
 })();
@@ -820,6 +1448,7 @@ function flipCard(c,on,isKeyboard){
   var was=c.dataset.o==='true';
   if(was===on)return;
   c.dataset.o=on;
+  if(root.getAttribute('data-theme')==='space'&&typeof playCosmicTone==='function')playCosmicTone('gravPulse');
   var ff=$('.ff',c),fb=$('.fb',c);
   var ffTb=$('.tb',ff),fbTb=$('.tb',fb);
   if(ffTb)ffTb.setAttribute('aria-expanded',on);
@@ -843,6 +1472,7 @@ P.forEach(function(p,i){
   c.innerHTML='<div class="fl"><div class="fc ff sp"><div class="top"><span class="lg"><i></i>'+p.c+'</span>'+(p.d?'<span class="dt">'+p.d+'</span>':'')+'</div><h3>'+p.n+'</h3><p>'+p.s+'</p><div class="met">'+(p.m||[]).map(function(m){return'<div><b>'+m[0]+'</b><span>'+m[1]+'</span></div>'}).join('')+'</div><div class="tgs">'+(p.x||[]).map(function(x){return'<span>'+x+'</span>'}).join('')+'</div>'+(p.live?'<a class="lv" href="'+p.live+'" target="_blank" rel="noopener noreferrer"><i></i>Live site</a>':'')+'<span class="mk" aria-hidden="true">'+ini(p.n)+'</span><button class="tb" aria-expanded="false" aria-controls="b'+i+'"><span>See details</span>'+flipI+'</button></div>'
   +'<div class="fc fb sp" id="b'+i+'" aria-hidden="true"><div class="top"><span class="lg"><i></i>Deep dive</span><span class="dt">'+p.c+'</span></div><h3>'+p.n+'</h3><ul>'+p.b.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul><div class="pl"><a href="'+GH+p.r+'" target="_blank" rel="noopener noreferrer">'+codeI+' Code</a>'+(p.live?'<a class="pl-live" href="'+p.live+'" target="_blank" rel="noopener noreferrer">'+extI+' Live site</a>':'')+'</div><button class="tb" aria-label="Flip back to overview"><span>Flip back</span>'+flipI+'</button></div></div>';
   $$('a, button',$('.fb',c)).forEach(function(el){el.tabIndex=-1});
+  c.addEventListener('pointerenter',function(){if(root.getAttribute('data-theme')==='space'&&typeof playCosmicTone==='function')playCosmicTone('hover')});
   $('.ff',c).addEventListener('click',function(e){if(e.target.closest('a'))return;flipCard(c,true,e.detail===0)});
   $('.fb',c).addEventListener('click',function(e){if(e.target.closest('a'))return;flipCard(c,false,e.detail===0)});
   c.addEventListener('keydown',function(e){if(e.key==='Escape'&&c.dataset.o==='true'){e.stopPropagation();flipCard(c,false,true)}});
